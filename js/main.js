@@ -1,14 +1,14 @@
 'use strict';
 
 $(document).ready(function() {  
-  // getСurrencies();
-  // fillСurrencies();
+  //getСurrencies();
+  //fillСurrencies();
 
   createTmpScript();
   createTableStocks();
   updateTableStocks();
 
-  setInterval(updateTableStocks, 5000);
+  //setInterval(updateTableStocks, 5000);
 });
 
 // Котировки валют
