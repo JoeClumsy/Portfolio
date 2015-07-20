@@ -8,7 +8,7 @@ $(document).ready(function() {
   createTableStocks();
   updateTableStocks();
 
-  //setInterval(updateTableStocks, 5000);
+  setInterval(updateTableStocks, 10000);
 });
 
 // Котировки валют
@@ -66,6 +66,12 @@ function createTableStocks() {
   $('thead', tableStocks).append(titleCell);
 
   $('body').append(tableStocks);
+
+  $('#Stocks').tablesorter({
+    widgets: ["saveSort"]
+  });  
+  $('#Stocks').trigger('saveSortReset');
+  $('#Stocks').trigger("sortReset");
 }
 
 // Обновление акций
@@ -77,11 +83,7 @@ function updateTableStocks() {
 
   $('#tbodyStocks').empty();
   $('#valueScript').tmpl(shares).appendTo('tbody');
-}
-
-// Сортировка акций
-function sortTblStocks() {
-  
+  $('#Stocks').trigger('update');  
 }
 
 // Курсы валют с Micex
