@@ -1,6 +1,8 @@
 'use strict';
 
 $(document).ready(function() {  
+  if (!isChrome()) return;
+
   getСurrencies();
   fillСurrencies();
 
@@ -10,6 +12,17 @@ $(document).ready(function() {
 
   setInterval(updateTableStocks, STOCK_UPDATE_INTERVAL * 1000);
 });
+
+// Браузер
+function isChrome() {
+  if (navigator.userAgent.search(/Chrome/) != -1) return true;
+
+  $('<p/>', {  
+    text: NOT_CHROME
+  }).appendTo('body');  ;
+
+  return false;
+}
 
 // Котировки валют
 function fillСurrencies() {

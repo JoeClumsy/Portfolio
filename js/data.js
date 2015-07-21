@@ -11,6 +11,8 @@ var MICEX_STOCK_PRICES =
     + 'securities.json';
 // Путь к акции на Moex
 var MOEX_STOCK_URL = 'http://moex.com/ru/issue.aspx?code='; 
+// Не поддерживаемый браузер
+var NOT_CHROME = 'Данный браузер не поддерживается. Используйте Google Chrome.'
 
 // Структура валюты
 var currencies = [
