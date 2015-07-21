@@ -1,3 +1,18 @@
+// Интервал обновления Stock в сек.
+var STOCK_UPDATE_INTERVAL = 15;
+// Процент дисконта выделения цены в Stock 
+var DISCOUNT_MARKER = 110;      
+// Курсы валют с Micex 
+var MICEX_EXCHANGE_RATES =      
+  'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/rates.json';
+// Котировки акций с Micex
+var MICEX_STOCK_PRICES =        
+  'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' 
+    + 'securities.json';
+// Путь к акции на Moex
+var MOEX_STOCK_URL = 'http://moex.com/ru/issue.aspx?code='; 
+
+// Структура валюты
 var currencies = [
   {
     tikr: 'USD',
@@ -9,6 +24,7 @@ var currencies = [
   }
 ];
 
+// Структура акции
 var shares = [
   { 
     tikr: 'GAZP',

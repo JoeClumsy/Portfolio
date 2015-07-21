@@ -1,14 +1,14 @@
 'use strict';
 
 $(document).ready(function() {  
-  //getСurrencies();
-  //fillСurrencies();
+  getСurrencies();
+  fillСurrencies();
 
   createTmpScript();
   createTableStocks();
   updateTableStocks();
 
-  setInterval(updateTableStocks, 10000);
+  setInterval(updateTableStocks, STOCK_UPDATE_INTERVAL * 1000);
 });
 
 // Котировки валют
@@ -88,11 +88,7 @@ function updateTableStocks() {
 
 // Курсы валют с Micex
 function getСurrencies() {
-  var requestURL = 
-    'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/' 
-      + 'rates.json';
-  
-  var responseData = getExtData(requestURL);
+  var responseData = getExtData(MICEX_EXCHANGE_RATES);
   if (!responseData) return;
 
   var metaData = responseData.cbrf.data;
@@ -106,11 +102,8 @@ function getСurrencies() {
 // Котировки акций с Micex
 function getQuotes() {
   var quotes = {};
-  var requestURL = 
-    'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' 
-    + 'securities.json';
 
-  var responseData = getExtData(requestURL);
+  var responseData = getExtData(MICEX_STOCK_PRICES);
   if (!responseData) return;
 
   var secData = responseData.securities.data;
@@ -120,7 +113,7 @@ function getQuotes() {
     quotes[secData[i][0]] = {    
       lot: secData[i][4],
       price: marketData[i][12], 
-      moex: 'http://moex.com/ru/issue.aspx?code=' + secData[i][0],
+      moex: MOEX_STOCK_URL + secData[i][0],
       type: secData[i][25] == 1 ? 'обыч' : 'прив'};
   }
 
@@ -135,7 +128,7 @@ function setShares(shares, quotes) {
     item.discount = Math.round(item.price * 100 / item.target * 100) / 100;
     item.moex = quotes[item.tikr].moex;
     item.type = quotes[item.tikr].type;
-    item.state = item.discount < 110 ? ' class=buy' : '';
+    item.state = item.discount < DISCOUNT_MARKER ? ' class=buy' : '';
   });
 
   return shares;
