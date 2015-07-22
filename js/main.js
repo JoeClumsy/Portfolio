@@ -19,7 +19,7 @@ function isChrome() {
 
   $('<p/>', {  
     text: NOT_CHROME
-  }).appendTo('body');  ;
+  }).appendTo('body');
 
   return false;
 }
@@ -81,10 +81,17 @@ function createTableStocks() {
   $('body').append(tableStocks);
 
   $('#Stocks').tablesorter({
-    widgets: ["saveSort"]
+    cancelSelection: true,
+    cssAsc: 'headerSortUp',
+    cssDesc: 'headerSortDown',
+    cssHeader: 'header',
+    widgets: ['saveSort']
+    // ,sortReset      : true,
+    //   sortRestart    : true
+    //,debug: true
   });  
-  $('#Stocks').trigger('saveSortReset');
-  $('#Stocks').trigger("sortReset");
+  $('#Stocks').trigger('saveSortReset');// ??
+  $('#Stocks').trigger("sortReset");// ??
 }
 
 // Обновление акций
