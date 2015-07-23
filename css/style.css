@@ -8,10 +8,16 @@ table.tableStocks {
   /*border-spacing: 10px 10px;*/
 }
 
+table.tableStocks caption {
+  font-size: 18px;
+  color: #3f3f3f;
+  text-align: left;
+}
+
 table.tableStocks th {
-  color: #606060;
   font-size: 11px;
   font-weight: normal;
+  color: #606060;
   cursor: pointer;
   outline: none;
   padding-right: 9px;

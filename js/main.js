@@ -61,6 +61,9 @@ function createTableStocks() {
     class:'tableStocks',
     id: 'Stocks'
   }).append(
+    $('<caption/>', {
+      text: 'Акции'  
+    }),
     $('<thead/>'),
     $('<tbody/>', {
       id: 'tbodyStocks'
@@ -81,17 +84,17 @@ function createTableStocks() {
   $('body').append(tableStocks);
 
   $('#Stocks').tablesorter({
-    cancelSelection: true,
     cssAsc: 'headerSortUp',
     cssDesc: 'headerSortDown',
     cssHeader: 'header',
-    widgets: ['saveSort']
-    // ,sortReset      : true,
-    //   sortRestart    : true
-    //,debug: true
+    cancelSelection: true, // запрет выделения TH
+    sortReset: true, // третий клик удаляет сортировку
+    sortRestart : true, // начальная сортировка при клике на несортированном
+    sortInitialOrder: 'asc',
+    widgets: ['saveSort'] // сохранение сортировки
   });  
-  $('#Stocks').trigger('saveSortReset');// ??
-  $('#Stocks').trigger("sortReset");// ??
+  $('#Stocks').trigger('saveSortReset'); // очистка сохраненной сортировки
+  $('#Stocks').trigger("sortReset"); // удаление текущей сортировки
 }
 
 // Обновление акций
