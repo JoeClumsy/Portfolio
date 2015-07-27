@@ -31,15 +31,23 @@ var shares = [
   { 
     tikr: 'GAZP',
     company: 'Газпром',
-    target: 110,
+    target: 100,
     book_value: 9816558000000,
     net_profit: 159004000000,
     site: 'http://www.gazprom.ru/investors/disclosure/reports/2015'
   },
+  {
+    tikr: 'SBERP',
+    company: 'Сбербанк России',  
+    target: 30,
+    book_value: 2020100000000,
+    net_profit: 290300000000,
+    site: 'http://data.sberbank.ru/moscow/ru/investor_relations/accountability/fin_reports_ifrs/?base=beta'
+  }, 
   { 
     tikr: 'ROSN',
     company: 'Роснефть',
-    target: 180,
+    target: 120,
     book_value: 2872000000000,
     net_profit: 348000000000,
     site: 'http://www.rosneft.ru/Investors/statements_and_presentations'
@@ -47,58 +55,146 @@ var shares = [
   {
     tikr: 'RTKMP',
     company: 'Ростелеком', 
-    target: 45,
+    target: 30,
     book_value: 24151000000,
     net_profit: 37520000000,
     site: 'http://www.rostelecom.ru/ir/results_and_presentations/financials/IFRS'
   },
   {
-    tikr: 'SBERP',
-    company: 'Сбербанк России',  
-    target: 47,
-    book_value: 2020100000000,
-    net_profit: 290300000000,
-    site: 'http://data.sberbank.ru/moscow/ru/investor_relations/accountability/fin_reports_ifrs/?base=beta'
-  }, 
-  {
-    tikr: 'ALRS', 
-    company: 'АЛРОСА',  
-    target: 15,
+    tikr: 'VTBR',
+    company: 'Банк ВТБ', 
+    target: 0.03,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.alrosa.ru/documents/ежеквартальные-отчеты'
-  },
-  {
-    tikr: 'BANEP', 
-    company: 'Башнефть',   
-    target: 950,
-    book_value: 0,
-    net_profit: 0,
-    site: 'http://www.bashneft.ru/shareholders_and_investors/disclosure/quarterly'
-  },
-  {
-    tikr: 'EONR', 
-    company: 'Э.ОН Россия',  
-    target: 1.6,
-    book_value: 0,
-    net_profit: 0,
-    site: 'http://www.eon-russia.ru/shareholders/reports/finance_reports'
+    site: 'http://www.vtb.ru/ir/statements'
   },
   {
     tikr: 'GMKN',
     company: 'Норильский никель',
-    target: 4500,
+    target: 4000,
     book_value: 0,
     net_profit: 0,
     site: 'http://www.nornik.ru/investoram/raskryitie-informaczii/ezhekvartalnyie-otchetyi-emitenta'
   },
   {
-    tikr: 'IRGZ',
-    company: 'Иркутскэнерго',
-    target: 4.1,
+    tikr: 'MOEX',
+    company: 'Московская Биржа', 
+    target: 40,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.irkutskenergo.ru/qa/42.2.html'
+    site: 'http://moex.com/s1347'
+  },
+  {
+    tikr: 'BANEP', 
+    company: 'Башнефть',   
+    target: 700,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.bashneft.ru/shareholders_and_investors/disclosure/quarterly'
+  },
+  {
+    tikr: 'SNGSP', 
+    company: 'Сургутнефтегаз',   
+    target: 20,
+    book_value: 0,
+    net_profit: 0,  
+    site: 'http://www.surgutneftegas.ru/ru/investors/reports/quarterly'
+  },
+  {
+    tikr: 'EONR', 
+    company: 'Э.ОН Россия',  
+    target: 1.8,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.eon-russia.ru/shareholders/reports/finance_reports'
+  },
+  {
+    tikr: 'ENRU',
+    company: 'Энел Россия', 
+    target: 0.6,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://enel.ru/press_center/investor_information/financial_statements/ifsr_financial_statements/index.php'
+  },
+  {
+    tikr: 'LSNGP',
+    company: 'Ленэнерго', 
+    target: 8,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.lenenergo.ru/shareholders/fin_reports/?part=1'
+  },
+  {
+    tikr: 'HYDR',
+    company: 'РусГидро', 
+    target: 0.36,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.rushydro.ru/investors/reports'
+  },
+  {
+    tikr: 'VRAOP',
+    company: 'РАО ЭС Востока', 
+    target: 0.07,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.rao-esv.ru/shareholders-and-investors/financial-statements/ifrs'
+  },
+  {
+    tikr: 'RSTIP',
+    company: 'Российские сети', 
+    target: 0.3,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.rosseti.ru/investors/info/financeinfo/reports/msfo'
+  },
+  {
+    tikr: 'FEES',
+    company: 'ФСК ЕЭС', 
+    target: 0.05,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.fsk-ees.ru/shareholders_and_investors/financial_information/reporting_under_ifrs'
+  },
+  {
+    tikr: 'TORSP',
+    company: 'Томская РП', 
+    target: 0.1,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.trk.tom.ru/investors/disclosure/finance.php?bitrix_include_areas=Y&clear_cache=Y&year=По+МСФО'
+  },
+  {
+    tikr: 'MTSS',
+    company: 'Мобильные ТелеСистемы',    
+    target: 150,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.company.mts.ru/ir/control/data/quarterly_reports'
+  },
+  {
+    tikr: 'MGTSP',
+    company: 'МГТС', 
+    target: 370,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://mgts.ru/company/investors/disclose/reports'
+  },
+  {
+    tikr: 'MFON',
+    company: 'МегаФон', 
+    target: 610,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://corp.megafon.ru/investors/shareholder/financial_report'
+  },
+  {
+    tikr: 'ALRS', 
+    company: 'АЛРОСА',  
+    target: 20,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.alrosa.ru/documents/ежеквартальные-отчеты'
   },
   {
     tikr: 'IRKT',
@@ -109,20 +205,44 @@ var shares = [
     site: 'http://www.irkut.com/investors-and-shareholders/statements'
   },
   {
-    tikr: 'MTSS',
-    company: 'Мобильные ТелеСистемы',    
-    target: 180,
+    tikr: 'IRGZ',
+    company: 'Иркутскэнерго',
+    target: 4.1,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.company.mts.ru/ir/control/data/quarterly_reports'
+    site: 'http://www.irkutskenergo.ru/qa/42.2.html'
+  },  
+  {
+    tikr: 'GCHE',
+    company: 'Группа Черкизово', 
+    target: 400,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://cherkizovo.com/investors/reports/financial'
   },
   {
-    tikr: 'SNGSP', 
-    company: 'Сургутнефтегаз',   
-    target: 16,
+    tikr: 'PRTK',
+    company: 'ПРОТЕК', 
+    target: 18,
     book_value: 0,
-    net_profit: 0,  
-    site: 'http://www.surgutneftegas.ru/ru/investors/reports/quarterly'
+    net_profit: 0,
+    site: 'http://www.protek-group.ru/ru/4investors/oao-protek/financial-results1'
+  },      
+  {
+    tikr: 'PHOR',
+    company: 'ФосАгро', 
+    target: 1000,
+    book_value: 0,
+    net_profit: 0,
+    site: 'https://www.phosagro.ru/investors/reports/msfo'
+  }, 
+  {
+    tikr: 'AKRN',
+    company: 'Акрон', 
+    target: 900,
+    book_value: 0,
+    net_profit: 0,
+    site: 'http://www.acron.ru/investors/financial_statement/?set_filter=Y&arFilterDocument_46_4163016541=Y&arFilterDocument_IBLOCK_SECTION_ID_326707096=Y&arFilterDocument_YEAR_3487811895=Y'
   }
 ];
 

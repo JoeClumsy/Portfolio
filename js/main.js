@@ -43,7 +43,7 @@ function createTmpScript() {
       <td><a href=${site}>${company}</a></td> \
       <td${state}>${price}</td> \
       <td>${target}</td> \
-      <td>${discount}%</td> \
+      <td>${discount}</td> \
       <td>${pe}</td> \
       <td>${pb}</td> \
       <td>${lot}</td> \
@@ -135,8 +135,6 @@ function getQuotes() {
   var marketData = responseData.marketdata.data;
 
   for (var i = 0; i < secData.length; i++) {
-    //if (!marketData[i][12]) return;
-
     quotes[secData[i][0]] = {    
       lot: secData[i][4],
       price: marketData[i][12],
@@ -151,19 +149,34 @@ function getQuotes() {
 // Данные по акциям
 function setShares(shares, quotes) {
   shares.forEach(function(item) {
-    if (!quotes[item.tikr].price) return;
-
-    item.lot = quotes[item.tikr].lot;
-    item.price = quotes[item.tikr].price;
-    item.discount = Math.round(item.price * 100 / item.target * 100) / 100;
-    item.volume = quotes[item.tikr].volume;
-    item.pe = Math.round(
-      item.volume * item.price / item.net_profit * 100) / 100;
-    item.pb = Math.round(
-      item.volume * item.price / item.book_value * 100) / 100;
+    item.lot = quotes[item.tikr].lot || item.lot || null;
+    item.price = quotes[item.tikr].price || item.price || null;
+    item.volume = quotes[item.tikr].volume || item.volume || null;    
     item.moex = quotes[item.tikr].moex;
     item.type = quotes[item.tikr].type;
     item.state = item.discount < DISCOUNT_MARKER ? ' class=buy' : '';
+
+    if (item.price) {
+      item.discount =  
+        Math.round(item.price * 100 / item.target * 100) / 100 + '%';
+      item.pe = item.net_profit ? 
+        Math.round(item.volume * item.price / item.net_profit * 100) / 100 :
+        null;
+      item.pb = item.book_value ?
+        Math.round(item.volume * item.price / item.book_value * 100) / 100 : 
+        null;
+    } else {
+      item.discount = item.pe = item.pb = null;
+    }
+
+    // item.discount = item.price ? 
+    //   Math.round(item.price * 100 / item.target * 100) / 100 + '%' : null;
+    // item.volume = quotes[item.tikr].volume || item.volume || null;
+    // item.pe = item.price ? 
+    //   Math.round(item.volume * item.price / item.net_profit * 100) / 100 : null;
+    // item.pb = item.price ?
+    //   Math.round(item.volume * item.price / item.book_value * 100) / 100 : null;
+
   });
 
   return shares;
