@@ -1,6 +1,6 @@
 // Интервал обновления Stock в сек.
 var STOCK_UPDATE_INTERVAL = 15;
-// Процент дисконта выделения цены в Stock 
+// Дисконт условие выделения цены в Stock 
 var DISCOUNT_MARKER = 110;      
 // Курсы валют с Micex 
 var MICEX_EXCHANGE_RATES =      
@@ -42,7 +42,8 @@ var shares = [
     target: 30,
     book_value: 2020100000000,
     net_profit: 290300000000,
-    site: 'http://data.sberbank.ru/moscow/ru/investor_relations/accountability/fin_reports_ifrs/?base=beta'
+    site: 'http://data.sberbank.ru/moscow/ru/investor_relations/' + 
+      'accountability/fin_reports_ifrs/?base=beta'
   }, 
   { 
     tikr: 'ROSN',
@@ -58,7 +59,8 @@ var shares = [
     target: 30,
     book_value: 24151000000,
     net_profit: 37520000000,
-    site: 'http://www.rostelecom.ru/ir/results_and_presentations/financials/IFRS'
+    site: 'http://www.rostelecom.ru/ir/results_and_presentations/financials/' + 
+      'IFRS'
   },
   {
     tikr: 'VTBR',
@@ -74,7 +76,8 @@ var shares = [
     target: 4000,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.nornik.ru/investoram/raskryitie-informaczii/ezhekvartalnyie-otchetyi-emitenta'
+    site: 'http://www.nornik.ru/investoram/raskryitie-informaczii/' + 
+      'ezhekvartalnyie-otchetyi-emitenta'
   },
   {
     tikr: 'MOEX',
@@ -90,7 +93,8 @@ var shares = [
     target: 700,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.bashneft.ru/shareholders_and_investors/disclosure/quarterly'
+    site: 'http://www.bashneft.ru/shareholders_and_investors/disclosure/' + 
+      'quarterly'
   },
   {
     tikr: 'SNGSP', 
@@ -114,7 +118,8 @@ var shares = [
     target: 0.6,
     book_value: 0,
     net_profit: 0,
-    site: 'http://enel.ru/press_center/investor_information/financial_statements/ifsr_financial_statements/index.php'
+    site: 'http://enel.ru/press_center/investor_information/' + 
+      'financial_statements/ifsr_financial_statements/index.php'
   },
   {
     tikr: 'LSNGP',
@@ -138,7 +143,8 @@ var shares = [
     target: 0.07,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.rao-esv.ru/shareholders-and-investors/financial-statements/ifrs'
+    site: 'http://www.rao-esv.ru/shareholders-and-investors/' + 
+      'financial-statements/ifrs'
   },
   {
     tikr: 'RSTIP',
@@ -154,7 +160,8 @@ var shares = [
     target: 0.05,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.fsk-ees.ru/shareholders_and_investors/financial_information/reporting_under_ifrs'
+    site: 'http://www.fsk-ees.ru/shareholders_and_investors/' + 
+      'financial_information/reporting_under_ifrs'
   },
   {
     tikr: 'TORSP',
@@ -162,7 +169,8 @@ var shares = [
     target: 0.1,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.trk.tom.ru/investors/disclosure/finance.php?bitrix_include_areas=Y&clear_cache=Y&year=По+МСФО'
+    site: 'http://www.trk.tom.ru/investors/disclosure/finance.php?' + 
+      'bitrix_include_areas=Y&clear_cache=Y&year=По+МСФО'
   },
   {
     tikr: 'MTSS',
@@ -226,7 +234,8 @@ var shares = [
     target: 18,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.protek-group.ru/ru/4investors/oao-protek/financial-results1'
+    site: 'http://www.protek-group.ru/ru/4investors/oao-protek/' + 
+      'financial-results1'
   },      
   {
     tikr: 'PHOR',
@@ -242,7 +251,10 @@ var shares = [
     target: 900,
     book_value: 0,
     net_profit: 0,
-    site: 'http://www.acron.ru/investors/financial_statement/?set_filter=Y&arFilterDocument_46_4163016541=Y&arFilterDocument_IBLOCK_SECTION_ID_326707096=Y&arFilterDocument_YEAR_3487811895=Y'
+    site: 'http://www.acron.ru/investors/financial_statement/?' + 
+      'set_filter=Y&arFilterDocument_46_4163016541=Y&' + 
+      'arFilterDocument_IBLOCK_SECTION_ID_326707096=Y&' + 
+      'arFilterDocument_YEAR_3487811895=Y'
   }
 ];
 
