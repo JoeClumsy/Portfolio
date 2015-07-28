@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready(function() {  
-  if (!isChrome()) return;
+  if (isNotChrome()) return;
 
   getСurrencies();
   fillСurrencies();
@@ -14,14 +14,14 @@ $(document).ready(function() {
 });
 
 // Браузер
-function isChrome() {
-  if (navigator.userAgent.search(/Chrome/) != -1) return true;
+function isNotChrome() {
+  if (navigator.userAgent.search(/Chrome/) != -1) return false;
 
   $('<p/>', {  
     text: NOT_CHROME
   }).appendTo('body');
 
-  return false;
+  return true;
 }
 
 // Котировки валют
@@ -39,8 +39,9 @@ function fillСurrencies() {
 function createTmpScript() {
   var tableValue = ' \
     <tr> \
+      <td>${queue}</td> \
       <td><a href=${moex}>${tikr}</a></td> \
-      <td><a href=${site}>${company}</a></td> \
+      <td><a href=${site} title=${rep_type}>${company}</a></td> \
       <td${state}>${price}</td> \
       <td>${target}</td> \
       <td>${discount}</td> \
@@ -158,13 +159,14 @@ function setShares(shares, quotes) {
 
     if (item.price) {
       item.discount =  
-        Math.round(item.price * 100 / item.target * 100) / 100 + '%';
+        (Math.round(item.price * 100 / item.target * 100) / 100).toFixed(2) + 
+        '%';
       item.pe = item.net_profit ? 
-        Math.round(item.volume * item.price / item.net_profit * 100) / 100 :
-        null;
+        (Math.round(item.volume * item.price / item.net_profit * 100)).
+        toFixed(2) / 100 : null;
       item.pb = item.book_value ?
-        Math.round(item.volume * item.price / item.book_value * 100) / 100 : 
-        null;
+        (Math.round(item.volume * item.price / item.book_value * 100)).
+        toFixed(2) / 100 : null;
     } else {
       item.discount = item.pe = item.pb = null;
     }
