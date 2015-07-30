@@ -31,6 +31,7 @@ var shares = [
   { 
     tikr: 'GAZP',
     company: 'Газпром',
+    state: true,
     target: 100,
     queue: 1,
     book_value: 9816558000000,
@@ -40,7 +41,8 @@ var shares = [
   },
   {
     tikr: 'SBERP',
-    company: 'Сбербанк России',  
+    company: 'Сбербанк России',
+    state: true,  
     target: 30,
     queue: 1,
     book_value: 2020100000000,
@@ -52,6 +54,7 @@ var shares = [
   { 
     tikr: 'ROSN',
     company: 'Роснефть',
+    state: true,
     target: 120,
     queue: 1,
     book_value: 2872000000000,
@@ -61,18 +64,20 @@ var shares = [
   },  
   {
     tikr: 'RTKMP',
-    company: 'Ростелеком', 
+    company: 'Ростелеком',
+    state: true, 
     target: 30,
     queue: 1,
-    book_value: 24151000000,
-    net_profit: 37520000000,
+    book_value: 255966000000,
+    net_profit: 35240000000,
     rep_type: 'МСФО&nbsp;2014',
     site: 'http://www.rostelecom.ru/ir/results_and_presentations/financials/' + 
       'IFRS'
   },
   {
     tikr: 'VTBR',
-    company: 'Банк ВТБ', 
+    company: 'Банк ВТБ',
+    state: true, 
     target: 0.03,
     queue: 1,
     book_value: 0,
@@ -83,6 +88,7 @@ var shares = [
   {
     tikr: 'GMKN',
     company: 'Норильский никель',
+    state: false, 
     target: 4000,
     queue: 2,
     book_value: 0,
@@ -92,7 +98,8 @@ var shares = [
   },
   {
     tikr: 'MOEX',
-    company: 'Московская Биржа', 
+    company: 'Московская Биржа',
+    state: false,  
     target: 40,
     queue: 2,
     book_value: 0,
@@ -101,7 +108,8 @@ var shares = [
   },
   {
     tikr: 'BANEP', 
-    company: 'Башнефть',   
+    company: 'Башнефть',
+    state: true,   
     target: 700,
     queue: 2,
     book_value: 0,
@@ -111,7 +119,8 @@ var shares = [
   },
   {
     tikr: 'SNGSP', 
-    company: 'Сургутнефтегаз',   
+    company: 'Сургутнефтегаз',
+    state: false,   
     target: 20,
     queue: 2,
     book_value: 0,
@@ -120,7 +129,8 @@ var shares = [
   },
   {
     tikr: 'EONR', 
-    company: 'Э.ОН Россия',  
+    company: 'Э.ОН Россия',
+    state: false,  
     target: 1.8,
     queue: 2,
     book_value: 0,
@@ -129,7 +139,8 @@ var shares = [
   },
   {
     tikr: 'ENRU',
-    company: 'Энел Россия', 
+    company: 'Энел Россия',
+    state: false, 
     target: 0.6,
     queue: 2,
     book_value: 0,
@@ -139,7 +150,8 @@ var shares = [
   },
   {
     tikr: 'LSNGP',
-    company: 'Ленэнерго', 
+    company: 'Ленэнерго',
+    state: true, 
     target: 8,
     queue: 2,
     book_value: 0,
@@ -148,7 +160,8 @@ var shares = [
   },
   {
     tikr: 'HYDR',
-    company: 'РусГидро', 
+    company: 'РусГидро',
+    state: true, 
     target: 0.36,
     queue: 2,
     book_value: 0,
@@ -157,7 +170,8 @@ var shares = [
   },
   {
     tikr: 'VRAOP',
-    company: 'РАО ЭС Востока', 
+    company: 'РАО ЭС Востока',
+    state: true, 
     target: 0.07,
     queue: 2,
     book_value: 0,
@@ -167,7 +181,8 @@ var shares = [
   },
   {
     tikr: 'RSTIP',
-    company: 'Российские сети', 
+    company: 'Российские сети',
+    state: true, 
     target: 0.3,
     queue: 2,
     book_value: 0,
@@ -176,7 +191,8 @@ var shares = [
   },
   {
     tikr: 'FEES',
-    company: 'ФСК ЕЭС', 
+    company: 'ФСК ЕЭС',
+    state: true, 
     target: 0.05,
     queue: 2,
     book_value: 0,
@@ -186,7 +202,8 @@ var shares = [
   },
   {
     tikr: 'TORSP',
-    company: 'Томская РП', 
+    company: 'Томская РП',
+    state: false, 
     target: 0.1,
     queue: 2,
     book_value: 0,
@@ -196,7 +213,8 @@ var shares = [
   },
   {
     tikr: 'MTSS',
-    company: 'Мобильные ТелеСистемы',    
+    company: 'Мобильные ТелеСистемы',
+    state: false,    
     target: 150,
     queue: 2,
     book_value: 0,
@@ -205,7 +223,8 @@ var shares = [
   },
   {
     tikr: 'MGTSP',
-    company: 'МГТС', 
+    company: 'МГТС',
+    state: false, 
     target: 370,
     queue: 2,
     book_value: 0,
@@ -214,7 +233,8 @@ var shares = [
   },
   {
     tikr: 'MFON',
-    company: 'МегаФон', 
+    company: 'МегаФон',
+    state: false, 
     target: 610,
     queue: 2,
     book_value: 0,
@@ -223,7 +243,8 @@ var shares = [
   },
   {
     tikr: 'ALRS', 
-    company: 'АЛРОСА',  
+    company: 'АЛРОСА',
+    state: true,  
     target: 20,
     queue: 2,
     book_value: 0,
@@ -232,7 +253,8 @@ var shares = [
   },
   {
     tikr: 'IRKT',
-    company: 'Иркут',    
+    company: 'Иркут',
+    state: true,    
     target: 4.4,
     queue: 2,
     book_value: 0,
@@ -242,6 +264,7 @@ var shares = [
   {
     tikr: 'IRGZ',
     company: 'Иркутскэнерго',
+    state: false,
     target: 4.1,
     queue: 2,
     book_value: 0,
@@ -250,7 +273,8 @@ var shares = [
   },  
   {
     tikr: 'GCHE',
-    company: 'Группа Черкизово', 
+    company: 'Группа Черкизово',
+    state: false, 
     target: 400,
     queue: 2,
     book_value: 0,
@@ -259,7 +283,8 @@ var shares = [
   },
   {
     tikr: 'PRTK',
-    company: 'ПРОТЕК', 
+    company: 'ПРОТЕК',
+    state: false, 
     target: 18,
     queue: 2,
     book_value: 0,
@@ -269,7 +294,8 @@ var shares = [
   },      
   {
     tikr: 'PHOR',
-    company: 'ФосАгро', 
+    company: 'ФосАгро',    
+    state: false, 
     target: 1000,
     queue: 2,
     book_value: 0,
@@ -278,7 +304,8 @@ var shares = [
   }, 
   {
     tikr: 'AKRN',
-    company: 'Акрон', 
+    company: 'Акрон',
+    state: false, 
     target: 900,
     queue: 2,
     book_value: 0,
@@ -294,11 +321,12 @@ var tableTitle = [
   ['#', 7],
   ['Тикер', 55],
   ['Компания', 190],
+  ['Госуч', 50],
   ['Цена', 50],
   ['Цель', 50],
   ['Дисконт', 75],
-  ['P/E', 45],
-  ['P/B', 45],
+  // ['P/E', 45],
+  // ['P/B', 45],
   ['Лот', 45],
   ['Тип', 55]
 ];

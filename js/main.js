@@ -42,14 +42,16 @@ function createTmpScript() {
       <td>${queue}</td> \
       <td><a href=${moex}>${tikr}</a></td> \
       <td><a href=${site} title=${rep_type}>${company}</a></td> \
-      <td${state}>${price}</td> \
+      <td>${state_part}</td> \
+      <td${price_class}>${price}</td> \
       <td>${target}</td> \
       <td>${discount}</td> \
-      <td>${pe}</td> \
-      <td>${pb}</td> \
       <td>${lot}</td> \
       <td>${type}</td> \
     </tr>';  
+
+      // <td>${pe}</td> \
+      // <td>${pb}</td> \
 
   $('<script/>', {  
     id: 'valueScript', 
@@ -137,11 +139,12 @@ function getQuotes() {
 
   for (var i = 0; i < secData.length; i++) {
     quotes[secData[i][0]] = {    
-      lot: secData[i][4],
-      price: marketData[i][12],
-      volume: secData[i][18],
+      lot: secData[i][4] || null,
+      price: marketData[i][12] || null,
+      volume: secData[i][18] || null,
       moex: MOEX_STOCK_URL + secData[i][0],
-      type: secData[i][25] == 1 ? 'обыч' : 'прив'};
+      type: secData[i][25] == 1 ? 'обыч' : 'прив'
+    };
   }
 
   return quotes;
@@ -150,12 +153,13 @@ function getQuotes() {
 // Данные по акциям
 function setShares(shares, quotes) {
   shares.forEach(function(item) {
+    item.state_part = item.state ? 'Да' : 'Нет';
     item.lot = quotes[item.tikr].lot || item.lot || null;
     item.price = quotes[item.tikr].price || item.price || null;
     item.volume = quotes[item.tikr].volume || item.volume || null;    
     item.moex = quotes[item.tikr].moex;
     item.type = quotes[item.tikr].type;
-    item.state = item.discount < DISCOUNT_MARKER ? ' class=buy' : '';
+    item.price_class = item.discount < DISCOUNT_MARKER ? ' class=buy' : '';
 
     if (item.price) {
       item.discount =  
@@ -170,15 +174,6 @@ function setShares(shares, quotes) {
     } else {
       item.discount = item.pe = item.pb = null;
     }
-
-    // item.discount = item.price ? 
-    //   Math.round(item.price * 100 / item.target * 100) / 100 + '%' : null;
-    // item.volume = quotes[item.tikr].volume || item.volume || null;
-    // item.pe = item.price ? 
-    //   Math.round(item.volume * item.price / item.net_profit * 100) / 100 : null;
-    // item.pb = item.price ?
-    //   Math.round(item.volume * item.price / item.book_value * 100) / 100 : null;
-
   });
 
   return shares;

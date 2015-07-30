@@ -41,8 +41,8 @@ table.tableStocks tbody tr:nth-child(odd) {
   background-color: #f8f8f8;
 }
 
-table.tableStocks th:nth-child(n+4), 
-td:nth-child(n+4) {
+table.tableStocks th:nth-child(n+5), 
+td:nth-child(n+5) {
   text-align: right;
 }
 
