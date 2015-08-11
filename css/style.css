@@ -2,19 +2,19 @@ body {
   font: 10pt sans-serif;
 }
 
-table.tableStocks {
+table.Stocks {
   border-collapse: collapse;
   text-align: left;
   /*border-spacing: 10px 10px;*/
 }
 
-table.tableStocks caption {
+table.Stocks caption {
   font-size: 18px;
   color: #3f3f3f;
   text-align: left;
 }
 
-table.tableStocks th {
+table.Stocks th {
   font-size: 11px;
   font-weight: normal;
   color: #606060;
@@ -23,39 +23,39 @@ table.tableStocks th {
   padding-right: 9px;
 }
 
-table.tableStocks thead tr .header {
-  background-image: url(../img/unsorted.gif);  
+table.Stocks thead tr .header {
+  background-image: url(../img/unsorted.gif);
   background-repeat: no-repeat;
   background-position: center right;
 }
 
-table.tableStocks thead tr .headerSortUp {
+table.Stocks thead tr .headerSortUp {
   background-image: url(../img/asc.gif);
 }
 
-table.tableStocks thead tr .headerSortDown {
+table.Stocks thead tr .headerSortDown {
   background-image: url(../img/desc.gif);
 }
 
-table.tableStocks tbody tr:nth-child(odd) {
+table.Stocks tbody tr:nth-child(odd) {
   background-color: #f8f8f8;
 }
 
-table.tableStocks th:nth-child(n+5), 
+table.Stocks th:nth-child(n+5),
 td:nth-child(n+5) {
   text-align: right;
 }
 
-table.tableStocks td {
-  padding-top: 5px; 
+table.Stocks td {
+  padding-top: 5px;
   padding-bottom: 5px;
 }
 
-table.tableStocks a {
+table.Stocks a {
   color: #3350e2;
   text-decoration: none;
 }
 
-table.tableStocks .buy {
+table.Stocks .buy {
   color: #188918;
 }

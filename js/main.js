@@ -1,196 +1,44 @@
 'use strict';
 
-$(document).ready(function() {  
+$(document).ready(function() {
+
   if (isNotChrome()) return;
 
-  getСurrencies();
-  fillСurrencies();
+  var currencies = new Currencies();
+  currencies.getRates();
 
-  createTmpScript();
-  createTableStocks();
-  updateTableStocks();
+  var stocks = new Stocks();
+  stocks.getQuotes();
 
-  setInterval(updateTableStocks, STOCK_UPDATE_INTERVAL * 1000);
+  var tableStocks = new Table(
+    'Stocks',
+    'stocksBody',
+    'stocksScript',
+    stockHeaderTmp,
+    stockBodyTmp
+  );
+  tableStocks.addTableTmp();
+  tableStocks.addTable();
+  tableStocks.updateData(stocks.shares);
+
+  setInterval(
+    function() {
+
+      stocks.getQuotes();
+      tableStocks.updateData(stocks.shares);
+
+    },
+    stocks.UPDATE_INTERVAL * 1000);
+
 });
 
-// Браузер
-function isNotChrome() {
-  if (navigator.userAgent.search(/Chrome/) != -1) return false;
+ // Check 4 Chrome
+ function isNotChrome() {
+   if (navigator.userAgent.search(/Chrome/) != -1) return false;
 
-  $('<p/>', {  
-    text: NOT_CHROME
-  }).appendTo('body');
+   $('<p/>', {
+     text: NOT_CHROME
+   }).appendTo('body');
 
-  return true;
-}
-
-// Котировки валют
-function fillСurrencies() {
-  var str = currencies[0].name + ': ' + currencies[0].price + 
-            '\u00A0\u00A0' +
-            currencies[1].name + ': ' + currencies[1].price;
-
-  $('<p/>', {  
-    text: str
-  }).appendTo('body');  
-}
-
-// Шаблон акций
-function createTmpScript() {
-  var tableValue = ' \
-    <tr> \
-      <td>${queue}</td> \
-      <td><a href=${moex}>${tikr}</a></td> \
-      <td><a href=${site} title=${rep_type}>${company}</a></td> \
-      <td>${state_part}</td> \
-      <td${price_class}>${price}</td> \
-      <td>${target}</td> \
-      <td>${discount}</td> \
-      <td>${lot}</td> \
-      <td>${type}</td> \
-    </tr>';  
-
-      // <td>${pe}</td> \
-      // <td>${pb}</td> \
-
-  $('<script/>', {  
-    id: 'valueScript', 
-    type: 'text/x-jquery-tmpl',
-    text: tableValue    
-  }).appendTo('body');  
-}
-
-// Таблица акции
-function createTableStocks() {  
-  var tableStocks = $('<table/>', {
-    class:'tableStocks',
-    id: 'Stocks'
-  }).append(
-    $('<caption/>', {
-      text: 'Акции'  
-    }),
-    $('<thead/>'),
-    $('<tbody/>', {
-      id: 'tbodyStocks'
-    })
-  );
-
-  var titleCell = $('<tr/>');
-  $.each(tableTitle, function(i, data) {
-    titleCell.append(
-      $('<th/>', {
-        text: data[0],
-        width: data[1]
-      })
-    );
-  });
-  $('thead', tableStocks).append(titleCell);
-
-  $('body').append(tableStocks);
-
-  $('#Stocks').tablesorter({
-    cssAsc: 'headerSortUp',
-    cssDesc: 'headerSortDown',
-    cssHeader: 'header',
-    cancelSelection: true, // запрет выделения TH
-    sortReset: true, // третий клик удаляет сортировку
-    sortRestart : true, // начальная сортировка при клике на несортированном
-    sortInitialOrder: 'asc',
-    widgets: ['saveSort'] // сохранение сортировки
-  });  
-  $('#Stocks').trigger('saveSortReset'); // очистка сохраненной сортировки
-  $('#Stocks').trigger("sortReset"); // удаление текущей сортировки
-}
-
-// Обновление акций
-function updateTableStocks() {
-  var quotes = getQuotes();
-  if (!quotes) return;
-
-  shares = setShares(shares, quotes);
-
-  $('#tbodyStocks').empty();
-  $('#valueScript').tmpl(shares).appendTo('tbody');
-  $('#Stocks').trigger('update');  
-}
-
-// Курсы валют с Micex
-function getСurrencies() {
-  var responseData = getExtData(MICEX_EXCHANGE_RATES);
-  if (!responseData) return;
-
-  var metaData = responseData.cbrf.data;
-
-  currencies[0].price = metaData[0][3];
-  currencies[1].price = metaData[0][6];
- 
-  return currencies;
-}
-
-// Котировки акций с Micex
-function getQuotes() {
-  var quotes = {};
-
-  var responseData = getExtData(MICEX_STOCK_PRICES);
-  if (!responseData) return;
-
-  var secData = responseData.securities.data;
-  var marketData = responseData.marketdata.data;
-
-  for (var i = 0; i < secData.length; i++) {
-    quotes[secData[i][0]] = {    
-      lot: secData[i][4] || null,
-      price: marketData[i][12] || null,
-      volume: secData[i][18] || null,
-      moex: MOEX_STOCK_URL + secData[i][0],
-      type: secData[i][25] == 1 ? 'обыч' : 'прив'
-    };
-  }
-
-  return quotes;
-}
-
-// Данные по акциям
-function setShares(shares, quotes) {
-  shares.forEach(function(item) {
-    item.state_part = item.state ? 'Да' : 'Нет';
-    item.lot = quotes[item.tikr].lot || item.lot || null;
-    item.price = quotes[item.tikr].price || item.price || null;
-    item.volume = quotes[item.tikr].volume || item.volume || null;    
-    item.moex = quotes[item.tikr].moex;
-    item.type = quotes[item.tikr].type;
-    item.price_class = item.discount < DISCOUNT_MARKER ? ' class=buy' : '';
-
-    if (item.price) {
-      item.discount =  
-        (Math.round(item.price * 100 / item.target * 100) / 100).toFixed(2) + 
-        '%';
-      item.pe = item.net_profit ? 
-        (Math.round(item.volume * item.price / item.net_profit * 100)).
-        toFixed(2) / 100 : null;
-      item.pb = item.book_value ?
-        (Math.round(item.volume * item.price / item.book_value * 100)).
-        toFixed(2) / 100 : null;
-    } else {
-      item.discount = item.pe = item.pb = null;
-    }
-  });
-
-  return shares;
-}
-
-// Данные из вне
-function getExtData(requestURL) {
-  var request = new XMLHttpRequest();
-
-  request.open('GET', requestURL, false);
-  try {
-    request.send();
-  }
-  catch(e) {
-    return;
-  }
-
-  if (!request.responseText) return;  
-  return JSON.parse(request.responseText);
-}
+   return true;
+ }

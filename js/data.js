@@ -1,35 +1,24 @@
-// Интервал обновления Stock в сек.
-var STOCK_UPDATE_INTERVAL = 15;
-// Дисконт условие выделения цены в Stock 
-var DISCOUNT_MARKER = 110;      
-// Курсы валют с Micex 
-var MICEX_EXCHANGE_RATES =      
-  'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/rates.json';
-// Котировки акций с Micex
-var MICEX_STOCK_PRICES =        
-  'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' 
-    + 'securities.json';
-// Путь к акции на Moex
-var MOEX_STOCK_URL = 'http://moex.com/ru/issue.aspx?code='; 
-// Не поддерживаемый браузер
+'use strict';
+
+// Unsupported browser
 var NOT_CHROME = 'Данный браузер не поддерживается. Используйте Google Chrome.'
 
-// Структура валюты
-var currencies = [
+// Currencies template
+var currTmp = [
   {
-    tikr: 'USD',
+    symbol: 'USD',
     name: 'Доллар'    
   },
   {
-    tikr: 'EUR',
+    symbol: 'EUR',
     name: 'Евро'    
   }
 ];
 
-// Структура акции
-var shares = [
+// Stocks template
+var stocksTmp = [
   { 
-    tikr: 'GAZP',
+    symbol: 'GAZP',
     company: 'Газпром',
     state: true,
     target: 100,
@@ -40,7 +29,7 @@ var shares = [
     site: 'http://www.gazprom.ru/investors/disclosure/reports/2015'
   },
   {
-    tikr: 'SBERP',
+    symbol: 'SBERP',
     company: 'Сбербанк России',
     state: true,  
     target: 30,
@@ -52,7 +41,7 @@ var shares = [
       'accountability/fin_reports_ifrs/?base=beta'
   }, 
   { 
-    tikr: 'ROSN',
+    symbol: 'ROSN',
     company: 'Роснефть',
     state: true,
     target: 120,
@@ -63,7 +52,7 @@ var shares = [
     site: 'http://www.rosneft.ru/Investors/statements_and_presentations'
   },  
   {
-    tikr: 'RTKMP',
+    symbol: 'RTKMP',
     company: 'Ростелеком',
     state: true, 
     target: 30,
@@ -75,7 +64,7 @@ var shares = [
       'IFRS'
   },
   {
-    tikr: 'VTBR',
+    symbol: 'VTBR',
     company: 'Банк ВТБ',
     state: true, 
     target: 0.03,
@@ -86,7 +75,7 @@ var shares = [
     site: 'http://www.vtb.ru/ir/statements'
   },
   {
-    tikr: 'GMKN',
+    symbol: 'GMKN',
     company: 'Норильский никель',
     state: false, 
     target: 4000,
@@ -97,7 +86,7 @@ var shares = [
       'ezhekvartalnyie-otchetyi-emitenta'
   },
   {
-    tikr: 'MOEX',
+    symbol: 'MOEX',
     company: 'Московская Биржа',
     state: false,  
     target: 40,
@@ -107,7 +96,7 @@ var shares = [
     site: 'http://moex.com/s1347'
   },
   {
-    tikr: 'BANEP', 
+    symbol: 'BANEP', 
     company: 'Башнефть',
     state: true,   
     target: 700,
@@ -118,7 +107,7 @@ var shares = [
       'quarterly'
   },
   {
-    tikr: 'SNGSP', 
+    symbol: 'SNGSP', 
     company: 'Сургутнефтегаз',
     state: false,   
     target: 20,
@@ -128,7 +117,7 @@ var shares = [
     site: 'http://www.surgutneftegas.ru/ru/investors/reports/quarterly'
   },
   {
-    tikr: 'EONR', 
+    symbol: 'EONR', 
     company: 'Э.ОН Россия',
     state: false,  
     target: 1.8,
@@ -138,7 +127,7 @@ var shares = [
     site: 'http://www.eon-russia.ru/shareholders/reports/finance_reports'
   },
   {
-    tikr: 'ENRU',
+    symbol: 'ENRU',
     company: 'Энел Россия',
     state: false, 
     target: 0.6,
@@ -149,7 +138,7 @@ var shares = [
       'financial_statements/ifsr_financial_statements/index.php'
   },
   {
-    tikr: 'LSNGP',
+    symbol: 'LSNGP',
     company: 'Ленэнерго',
     state: true, 
     target: 8,
@@ -159,7 +148,7 @@ var shares = [
     site: 'http://www.lenenergo.ru/shareholders/fin_reports/?part=1'
   },
   {
-    tikr: 'HYDR',
+    symbol: 'HYDR',
     company: 'РусГидро',
     state: true, 
     target: 0.36,
@@ -169,7 +158,7 @@ var shares = [
     site: 'http://www.rushydro.ru/investors/reports'
   },
   {
-    tikr: 'VRAOP',
+    symbol: 'VRAOP',
     company: 'РАО ЭС Востока',
     state: true, 
     target: 0.07,
@@ -180,7 +169,7 @@ var shares = [
       'financial-statements/ifrs'
   },
   {
-    tikr: 'RSTIP',
+    symbol: 'RSTIP',
     company: 'Российские сети',
     state: true, 
     target: 0.3,
@@ -190,7 +179,7 @@ var shares = [
     site: 'http://www.rosseti.ru/investors/info/financeinfo/reports/msfo'
   },
   {
-    tikr: 'FEES',
+    symbol: 'FEES',
     company: 'ФСК ЕЭС',
     state: true, 
     target: 0.05,
@@ -201,7 +190,7 @@ var shares = [
       'financial_information/reporting_under_ifrs'
   },
   {
-    tikr: 'TORSP',
+    symbol: 'TORSP',
     company: 'Томская РП',
     state: false, 
     target: 0.1,
@@ -212,7 +201,7 @@ var shares = [
       'bitrix_include_areas=Y&clear_cache=Y&year=По+МСФО'
   },
   {
-    tikr: 'MTSS',
+    symbol: 'MTSS',
     company: 'Мобильные ТелеСистемы',
     state: false,    
     target: 150,
@@ -222,7 +211,7 @@ var shares = [
     site: 'http://www.company.mts.ru/ir/control/data/quarterly_reports'
   },
   {
-    tikr: 'MGTSP',
+    symbol: 'MGTSP',
     company: 'МГТС',
     state: false, 
     target: 370,
@@ -232,7 +221,7 @@ var shares = [
     site: 'http://mgts.ru/company/investors/disclose/reports'
   },
   {
-    tikr: 'MFON',
+    symbol: 'MFON',
     company: 'МегаФон',
     state: false, 
     target: 610,
@@ -242,7 +231,7 @@ var shares = [
     site: 'http://corp.megafon.ru/investors/shareholder/financial_report'
   },
   {
-    tikr: 'ALRS', 
+    symbol: 'ALRS', 
     company: 'АЛРОСА',
     state: true,  
     target: 20,
@@ -252,7 +241,7 @@ var shares = [
     site: 'http://www.alrosa.ru/documents/ежеквартальные-отчеты'
   },
   {
-    tikr: 'IRKT',
+    symbol: 'IRKT',
     company: 'Иркут',
     state: true,    
     target: 4.4,
@@ -262,7 +251,7 @@ var shares = [
     site: 'http://www.irkut.com/investors-and-shareholders/statements'
   },
   {
-    tikr: 'IRGZ',
+    symbol: 'IRGZ',
     company: 'Иркутскэнерго',
     state: false,
     target: 4.1,
@@ -272,7 +261,7 @@ var shares = [
     site: 'http://www.irkutskenergo.ru/qa/42.2.html'
   },  
   {
-    tikr: 'GCHE',
+    symbol: 'GCHE',
     company: 'Группа Черкизово',
     state: false, 
     target: 400,
@@ -282,7 +271,7 @@ var shares = [
     site: 'http://cherkizovo.com/investors/reports/financial'
   },
   {
-    tikr: 'PRTK',
+    symbol: 'PRTK',
     company: 'ПРОТЕК',
     state: false, 
     target: 18,
@@ -293,7 +282,7 @@ var shares = [
       'financial-results1'
   },      
   {
-    tikr: 'PHOR',
+    symbol: 'PHOR',
     company: 'ФосАгро',    
     state: false, 
     target: 1000,
@@ -303,7 +292,7 @@ var shares = [
     site: 'https://www.phosagro.ru/investors/reports/msfo'
   }, 
   {
-    tikr: 'AKRN',
+    symbol: 'AKRN',
     company: 'Акрон',
     state: false, 
     target: 900,
@@ -317,16 +306,29 @@ var shares = [
   }
 ];
 
-var tableTitle = [
+var stockHeaderTmp = [
   ['#', 7],
-  ['Тикер', 55],
-  ['Компания', 190],
-  ['Госуч', 50],
-  ['Цена', 50],
-  ['Цель', 50],
-  ['Дисконт', 75],
+  ['Symbol', 55],
+  ['Company Name', 190],
+  ['State', 50],
+  ['Price', 50],
+  ['Target', 50],
+  ['Discount', 75],
   // ['P/E', 45],
   // ['P/B', 45],
-  ['Лот', 45],
-  ['Тип', 55]
+  ['Lot', 45],
+  ['Type', 55]
 ];
+
+var stockBodyTmp = ' \
+  <tr> \
+    <td>${queue}</td> \
+    <td><a href=${moex}>${symbol}</a></td> \
+    <td><a href=${site} title=${rep_type}>${company}</a></td> \
+    <td>${state_part}</td> \
+    <td${price_class}>${price}</td> \
+    <td>${target}</td> \
+    <td>${discount}</td> \
+    <td>${lot}</td> \
+    <td>${type}</td> \
+  </tr>';
