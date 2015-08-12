@@ -91,10 +91,11 @@ Stocks.prototype.getQuotes_ = function() {
 // Public get Quotes
 Stocks.prototype.getQuotes = function() {
 
+  var sets = Sets;
   var self = this;
   var quotes = this.getQuotes_();
 
-  stocksTmp.forEach( function(item) {
+  sets.objStocks.forEach( function(item) {
 
     item.state_part = item.state ? 'Да' : 'Нет';
     item.lot = quotes[item.symbol].lot || item.lot || null;
@@ -115,7 +116,7 @@ Stocks.prototype.getQuotes = function() {
 
   });
 
-   this.shares = stocksTmp;
+   this.shares = sets.objStocks;
 
  };
 
@@ -140,6 +141,8 @@ Currencies.prototype.MICEX_EXCHANGE_RATES =
 // Exchange rates from Micex
 Currencies.prototype.getRates = function() {
 
+  var sets = Sets;
+
   var responseData = Securities.prototype.getExternalData_(
     this.MICEX_EXCHANGE_RATES);
 
@@ -147,9 +150,9 @@ Currencies.prototype.getRates = function() {
 
   var metaData = responseData.cbrf.data;
 
-  currTmp[0].price = metaData[0][3];
-  currTmp[1].price = metaData[0][6];
+  sets.currencyTemplate[0].price = metaData[0][3];
+  sets.currencyTemplate[1].price = metaData[0][6];
 
-  this.Curr = currTmp;
+  this.Curr = sets.currencyTemplate;
 
 }

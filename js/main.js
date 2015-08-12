@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
 
+  var sets = Sets;
+
   if (isNotChrome()) return;
 
   var currencies = new Currencies();
@@ -14,8 +16,8 @@ $(document).ready(function() {
     'Stocks',
     'stocksBody',
     'stocksScript',
-    stockHeaderTmp,
-    stockBodyTmp
+    sets.stockHeaderTemplate,
+    sets.stockBodyTemplate
   );
   tableStocks.addTableTmp();
   tableStocks.addTable();
@@ -34,11 +36,15 @@ $(document).ready(function() {
 
  // Check 4 Chrome
  function isNotChrome() {
+
+   var sets = Sets;
+
    if (navigator.userAgent.search(/Chrome/) != -1) return false;
 
    $('<p/>', {
-     text: NOT_CHROME
+     text: sets.NOT_CHROME
    }).appendTo('body');
 
    return true;
+
  }
