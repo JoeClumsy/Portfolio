@@ -1,10 +1,9 @@
+'use strict';
+
 var Sets = (function namespace() {
-
-  'use strict';
-
   // Unsupported browser
   var NOT_CHROME =
-    'Данный браузер не поддерживается. Используйте Google Chrome.'
+      'Данный браузер не поддерживается. Используйте Google Chrome.'
 
   // Currencies template
   var currTmp = [
@@ -63,8 +62,8 @@ var Sets = (function namespace() {
       book_value: 255966000000,
       net_profit: 35240000000,
       rep_type: 'МСФО&nbsp;2014',
-      site: 'http://www.rostelecom.ru/ir/results_and_presentations/financials/' +
-      'IFRS'
+      site: 'http://www.rostelecom.ru/ir/results_and_presentations/' +
+      'financials/IFRS'
     },
     {
       symbol: 'VTBR',
@@ -339,13 +338,10 @@ var Sets = (function namespace() {
   </tr>';
 
   return {
-
     NOT_CHROME: NOT_CHROME,
     currencyTemplate: currTmp,
     objStocks: objStocks,
     stockHeaderTemplate: stockHeaderTmp,
     stockBodyTemplate: stockBodyTmp
-
   };
-
 }());

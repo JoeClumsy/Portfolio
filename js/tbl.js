@@ -2,35 +2,30 @@
 
 // Constructor
 function Table(
-               table_caption,
-               body_id,
-               script_id,
-               header_tmplate,
-               script_tmplate
+    table_caption,
+    body_id,
+    script_id,
+    header_tmplate,
+    script_tmplate
 ) {
-
   this.table_class = this.table_id = this.table_caption = table_caption;
   this.script_id = script_id;
   this.script_tmplate = script_tmplate;
   this.body_id = body_id;
   this.header_tmplate = header_tmplate;
-
 };
 
 // Add table template to page
 Table.prototype.addTableTmp = function() {
-
   $('<script/>', {
     id: this.script_id,
     type: 'text/x-jquery-tmpl',
     text: this.script_tmplate
   }).appendTo('body');
-
 };
 
 // Add table to page
 Table.prototype.addTable = function() {
-
   // Table frame
   var tbl = $('<table/>', {
     class: this.table_class,
@@ -74,23 +69,18 @@ Table.prototype.addTable = function() {
 
   $('#' + this.table_id).trigger('saveSortReset'); // clear save sort
   $('#' + this.table_id).trigger("sortReset"); // clear current sort
-
 };
 
 // Update data in table
 Table.prototype.updateData = function(data) {
-
   $('#' + this.body_id).empty();
   $('#' + this.script_id).tmpl(data).appendTo('#' + this.body_id);
   $('#' + this.table_id).trigger('update');
-
 };
 
 // Table auto update
 Table.prototype.autoUpdate = function(data, interval) {
-
   var self = this;
 
   setInterval(function() {self.updateData_(data)}, interval * 1000);
-
 };
