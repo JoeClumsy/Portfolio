@@ -79,7 +79,7 @@ Stocks.prototype.getQuotes_ = function() {
       price: marketData[i][12] === null ? null: marketData[i][12],
       volume: secData[i][18] === null ? null: secData[i][18],
       moex: this.MOEX_STOCK_URL + secData[i][0],
-      type: secData[i][25] === 1 ? 'обыч' : 'прив'
+      type: secData[i][25] === '1' ? 'обыч' : 'прив'
     };
   }
 

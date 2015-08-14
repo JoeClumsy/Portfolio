@@ -13,6 +13,7 @@ $(document).ready(function() {
 
   var tableStocks = new Table(
       'Stocks',
+      sets.STOCK_INIT_SORTING,
       'stocksBody',
       'stocksScript',
       sets.stockHeaderTemplate,

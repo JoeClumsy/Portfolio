@@ -308,6 +308,9 @@ var Sets = (function namespace() {
     }
   ];
 
+  // Stocks table initial sorting
+  var STOCK_INIT_SORTING = [[3,0], [6,0]];
+
   // Stocks header template
   var stockHeaderTmp = [
     ['#', 7],
@@ -339,6 +342,7 @@ var Sets = (function namespace() {
 
   return {
     NOT_CHROME: NOT_CHROME,
+    STOCK_INIT_SORTING: STOCK_INIT_SORTING,
     currencyTemplate: currTmp,
     objStocks: objStocks,
     stockHeaderTemplate: stockHeaderTmp,

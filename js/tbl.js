@@ -3,12 +3,14 @@
 // Constructor
 function Table(
     table_caption,
+    table_sorting,
     body_id,
     script_id,
     header_tmplate,
     script_tmplate
 ) {
   this.table_class = this.table_id = this.table_caption = table_caption;
+  this.table_sorting = table_sorting;
   this.script_id = script_id;
   this.script_tmplate = script_tmplate;
   this.body_id = body_id;
@@ -63,12 +65,15 @@ Table.prototype.addTable = function() {
     cancelSelection: true, // TH
     sortReset: true, // third mouse click
     sortRestart : true, // init sort by click on unsorting column
-    sortInitialOrder: 'asc',
+    //sortInitialOrder: 'asc',
     widgets: ['saveSort'] // save sorting
   });
 
   $('#' + this.table_id).trigger('saveSortReset'); // clear save sort
   $('#' + this.table_id).trigger("sortReset"); // clear current sort
+
+  // Initial sorting
+  $('#' + this.table_id).trigger('sorton', [this.table_sorting]);
 };
 
 // Update data in table
