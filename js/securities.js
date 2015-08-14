@@ -4,7 +4,6 @@
 
 // Constructor
 function Securities() {
-
 };
 
 // Get data from any site

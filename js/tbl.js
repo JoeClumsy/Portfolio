@@ -82,10 +82,3 @@ Table.prototype.updateData = function(data) {
   $('#' + this.script_id).tmpl(data).appendTo('#' + this.body_id);
   $('#' + this.table_id).trigger('update');
 };
-
-// Table auto update
-Table.prototype.autoUpdate = function(data, interval) {
-  var self = this;
-
-  setInterval(function() {self.updateData_(data)}, interval * 1000);
-};
