@@ -51,11 +51,11 @@ table.Stocks td {
   padding-bottom: 5px;
 }
 
-table.Stocks a {
-  color: #3350e2;
-  text-decoration: none;
-}
-
 table.Stocks .buy {
   color: #188918;
+}
+
+a {
+  color: #3350e2;
+  text-decoration: none;
 }

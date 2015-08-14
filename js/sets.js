@@ -5,6 +5,9 @@ var Sets = (function namespace() {
   var NOT_CHROME =
       'Данный браузер не поддерживается. Используйте Google Chrome.'
 
+  // MICEX index
+  var MICEX_INDEX_URL = 'http://moex.com/en/index/MICEXINDEXCF/technical';
+
   // Currencies template
   var currTmp = [
     {
@@ -21,7 +24,7 @@ var Sets = (function namespace() {
   var objStocks = [
     {
       symbol: 'GAZP',
-      company: 'Газпром',
+      company: 'Gazprom',
       state: true,
       target: 100,
       queue: 1,
@@ -32,7 +35,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'SBERP',
-      company: 'Сбербанк России',
+      company: 'Sberbank of Russia',
       state: true,
       target: 30,
       queue: 1,
@@ -44,7 +47,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'ROSN',
-      company: 'Роснефть',
+      company: 'Rosneft Oil Company',
       state: true,
       target: 120,
       queue: 1,
@@ -55,7 +58,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'RTKMP',
-      company: 'Ростелеком',
+      company: 'Rostelecom',
       state: true,
       target: 30,
       queue: 1,
@@ -67,7 +70,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'VTBR',
-      company: 'Банк ВТБ',
+      company: 'VTB Bank',
       state: true,
       target: 0.03,
       queue: 1,
@@ -78,7 +81,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'GMKN',
-      company: 'Норильский никель',
+      company: 'Norilsk Nickel',
       state: false,
       target: 4000,
       queue: 2,
@@ -89,7 +92,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'MOEX',
-      company: 'Московская Биржа',
+      company: 'Moscow Exchange MICEX-RTS',
       state: false,
       target: 40,
       queue: 2,
@@ -99,7 +102,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'BANEP',
-      company: 'Башнефть',
+      company: 'Oil Company Bashneft',
       state: true,
       target: 700,
       queue: 2,
@@ -110,7 +113,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'SNGSP',
-      company: 'Сургутнефтегаз',
+      company: 'Surgutneftegas',
       state: false,
       target: 20,
       queue: 2,
@@ -120,7 +123,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'EONR',
-      company: 'Э.ОН Россия',
+      company: 'E.ON Russia',
       state: false,
       target: 1.8,
       queue: 2,
@@ -130,7 +133,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'ENRU',
-      company: 'Энел Россия',
+      company: 'Enel Russia',
       state: false,
       target: 0.6,
       queue: 2,
@@ -141,7 +144,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'LSNGP',
-      company: 'Ленэнерго',
+      company: 'Lenenergo',
       state: true,
       target: 8,
       queue: 2,
@@ -151,7 +154,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'HYDR',
-      company: 'РусГидро',
+      company: 'RusHydro',
       state: true,
       target: 0.36,
       queue: 2,
@@ -161,7 +164,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'VRAOP',
-      company: 'РАО ЭС Востока',
+      company: 'RAO Energy System of the East',
       state: true,
       target: 0.07,
       queue: 2,
@@ -172,7 +175,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'RSTIP',
-      company: 'Российские сети',
+      company: 'Rosseti',
       state: true,
       target: 0.3,
       queue: 2,
@@ -182,7 +185,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'FEES',
-      company: 'ФСК ЕЭС',
+      company: 'Federal Grid Company of UES',
       state: true,
       target: 0.05,
       queue: 2,
@@ -193,7 +196,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'TORSP',
-      company: 'Томская РП',
+      company: 'Tomsk Distribution Company',
       state: false,
       target: 0.1,
       queue: 2,
@@ -204,7 +207,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'MTSS',
-      company: 'Мобильные ТелеСистемы',
+      company: 'Mobile TeleSystems',
       state: false,
       target: 150,
       queue: 2,
@@ -214,7 +217,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'MGTSP',
-      company: 'МГТС',
+      company: 'Moscow City Telephone Network',
       state: false,
       target: 370,
       queue: 2,
@@ -224,7 +227,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'MFON',
-      company: 'МегаФон',
+      company: 'MegaFon',
       state: false,
       target: 610,
       queue: 2,
@@ -234,7 +237,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'ALRS',
-      company: 'АЛРОСА',
+      company: 'Alrosa',
       state: true,
       target: 20,
       queue: 2,
@@ -244,7 +247,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'IRKT',
-      company: 'Иркут',
+      company: 'Irkut Corporation',
       state: true,
       target: 4.4,
       queue: 2,
@@ -254,7 +257,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'IRGZ',
-      company: 'Иркутскэнерго',
+      company: 'Irkutsk',
       state: false,
       target: 4.1,
       queue: 2,
@@ -264,7 +267,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'GCHE',
-      company: 'Группа Черкизово',
+      company: 'Cherkizovo Group',
       state: false,
       target: 400,
       queue: 2,
@@ -274,7 +277,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'PRTK',
-      company: 'ПРОТЕК',
+      company: 'Protek',
       state: false,
       target: 18,
       queue: 2,
@@ -285,7 +288,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'PHOR',
-      company: 'ФосАгро',
+      company: 'PhosAgro',
       state: false,
       target: 1000,
       queue: 2,
@@ -295,7 +298,7 @@ var Sets = (function namespace() {
     },
     {
       symbol: 'AKRN',
-      company: 'Акрон',
+      company: 'Acron',
       state: false,
       target: 900,
       queue: 2,
@@ -309,21 +312,21 @@ var Sets = (function namespace() {
   ];
 
   // Stocks table initial sorting
-  var STOCK_INIT_SORTING = [[3,0], [6,0]];
+  var STOCK_INIT_SORTING = [[3, 1], [6, 0]];
 
   // Stocks header template
   var stockHeaderTmp = [
     ['#', 7],
     ['Symbol', 55],
-    ['Company Name', 190],
-    ['State', 50],
+    ['Company Name', 200],
+    ['State', 30],
     ['Price', 50],
     ['Target', 50],
-    ['Discount', 75],
+    ['Discount', 70],
     // ['P/E', 45],
     // ['P/B', 45],
     ['Lot', 45],
-    ['Type', 55]
+    ['Type', 65]
   ];
 
   // Stocks body template
@@ -342,6 +345,7 @@ var Sets = (function namespace() {
 
   return {
     NOT_CHROME: NOT_CHROME,
+    MICEX_INDEX_URL: MICEX_INDEX_URL,
     STOCK_INIT_SORTING: STOCK_INIT_SORTING,
     currencyTemplate: currTmp,
     objStocks: objStocks,

@@ -50,19 +50,23 @@ Stocks.prototype = Object.create(Securities.prototype);
 Stocks.prototype.constructor = Stocks;
 
 // Properties
-Stocks.prototype.MICEX_STOCK_PRICES =
+Stocks.prototype.MICEX_STOCK_PRICES_URL =
     'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' +
     'securities.json';
-Stocks.prototype.MOEX_STOCK_URL = 'http://moex.com/ru/issue.aspx?code=';
+Stocks.prototype.MOEX_STOCK_URL = 'http://moex.com/en/issue.aspx?code=';
 Stocks.prototype.DISCOUNT_MARKER = 110;
 Stocks.prototype.UPDATE_INTERVAL = 15;
+Stocks.prototype.ORDINARY = 'ordinary';
+Stocks.prototype.PREFERRED = 'preferred';
+Stocks.prototype.STATE_PART_YES = 'yes';
+Stocks.prototype.STATE_PART_NO = 'no';
 
 // Private get quotes from Micex
 Stocks.prototype.getQuotes_ = function() {
   var quotes = {};
 
   var responseData = Securities.prototype.getExternalData_(
-      this.MICEX_STOCK_PRICES
+      this.MICEX_STOCK_PRICES_URL
   );
 
   if (!responseData) {
@@ -78,7 +82,7 @@ Stocks.prototype.getQuotes_ = function() {
       price: marketData[i][12] === null ? null: marketData[i][12],
       volume: secData[i][18] === null ? null: secData[i][18],
       moex: this.MOEX_STOCK_URL + secData[i][0],
-      type: secData[i][25] === '1' ? 'обыч' : 'прив'
+      type: secData[i][25] === '1' ? this.ORDINARY: this.PREFERRED
     };
   }
 
@@ -93,7 +97,7 @@ Stocks.prototype.getQuotes = function() {
   var quotes = this.getQuotes_();
 
   sets.objStocks.forEach( function(item) {
-    item.state_part = item.state ? 'Да' : 'Нет';
+    item.state_part = item.state ? self.STATE_PART_YES : self.STATE_PART_NO;
 
     item.lot = quotes[item.symbol].lot === null ?  null:
         quotes[item.symbol].lot;
@@ -140,7 +144,7 @@ Currencies.prototype = Object.create(Securities.prototype);
 Currencies.prototype.constructor = Currencies;
 
 // Properties
-Currencies.prototype.MICEX_EXCHANGE_RATES =
+Currencies.prototype.MICEX_EXCHANGE_RATES_URL =
     'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/' +
     'rates.json';
 
@@ -149,7 +153,7 @@ Currencies.prototype.getRates = function() {
   var sets = Sets;
 
   var responseData = Securities.prototype.getExternalData_(
-      this.MICEX_EXCHANGE_RATES
+      this.MICEX_EXCHANGE_RATES_URL
   );
 
   if (!responseData) {

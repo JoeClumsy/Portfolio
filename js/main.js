@@ -5,6 +5,11 @@ $(document).ready(function() {
 
   if (isNotChrome()) return;
 
+  $('<a/>', {
+    href: sets.MICEX_INDEX_URL,
+    text: 'MICEX Index'
+  }).appendTo('body');
+
   var currencies = new Currencies();
   currencies.getRates();
 
@@ -38,8 +43,8 @@ $(document).ready(function() {
         tableStocks.updateData(stocks.shares);
       },
       stocks.UPDATE_INTERVAL * 1000
-  );
-});
+  )
+})
 
  // Check 4 Chrome
 function isNotChrome() {
