@@ -5,11 +5,6 @@ $(document).ready(function() {
 
   if (isNotChrome()) return;
 
-  $('<a/>', {
-    href: sets.MICEX_INDEX_URL,
-    text: 'MICEX Index'
-  }).appendTo('body');
-
   var currencies = new Currencies();
   currencies.getRates();
 
@@ -18,9 +13,10 @@ $(document).ready(function() {
       '\u00a0\u00a0' + currencies.Curr[1].symbol + ': ' +
       currencies.Curr[1].price;
 
-  $('<p/>', {
-    text: currString
-  }).appendTo('body');
+  var header = $('<div></div>')
+      .append('<a href =' + sets.MICEX_INDEX_URL +
+      '>MICEX Index</a>\u00a0\u00a0' + '<text>' + currString + '</text><p/>');
+  $('body').append(header);
 
   var stocks = new Stocks();
   stocks.getQuotes();
