@@ -15,7 +15,7 @@ function Table(
   this.script_tmplate = script_tmplate;
   this.body_id = body_id;
   this.header_tmplate = header_tmplate;
-};
+}
 
 // Add table template to page
 Table.prototype.addTableTmp = function() {

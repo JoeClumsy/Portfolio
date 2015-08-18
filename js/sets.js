@@ -1,9 +1,11 @@
 'use strict';
 
-var Sets = (function namespace() {
+var portfolio = {};
+
+portfolio.sets = (function namespace() {
   // Unsupported browser
   var NOT_CHROME =
-      'Данный браузер не поддерживается. Используйте Google Chrome.'
+      'Данный браузер не поддерживается. Используйте Google Chrome.';
 
   // MICEX index
   var MICEX_INDEX_URL = 'http://moex.com/en/index/MICEXINDEXCF/technical';
@@ -330,18 +332,18 @@ var Sets = (function namespace() {
   ];
 
   // Stocks body template
-  var stockBodyTmp = ' \
-  <tr> \
-    <td>${queue}</td> \
-    <td><a href=${moex}>${symbol}</a></td> \
-    <td><a href=${site} title=${rep_type}>${company}</a></td> \
-    <td>${state_part}</td> \
-    <td${price_class}>${price}</td> \
-    <td>${target}</td> \
-    <td>${discount}</td> \
-    <td>${lot}</td> \
-    <td>${type}</td> \
-  </tr>';
+  var stockBodyTmp =
+      '<tr>' +
+        '<td>${queue}</td>' +
+        '<td><a href=${moex}>${symbol}</a></td>' +
+        '<td><a href=${site} title=${rep_type}>${company}</a></td>' +
+        '<td>${state_part}</td>' +
+        '<td${price_class}>${price}</td>' +
+        '<td>${target}</td>' +
+        '<td>${discount}</td>' +
+        '<td>${lot}</td>' +
+        '<td>${type}</td>' +
+      '</tr>';
 
   return {
     NOT_CHROME: NOT_CHROME,

@@ -4,12 +4,11 @@
 
 // Constructor
 function Securities() {
-};
+}
 
 // Get data from any site
 Securities.prototype.getExternalData_ = function(requestURL) {
   var request = new XMLHttpRequest();
-
   request.open('GET', requestURL, false);
 
   try {
@@ -42,24 +41,22 @@ Securities.prototype.getExternalData_ = function(requestURL) {
 
 // Constructor
 function Stocks() {   //Securities.call(this);
+  this.MICEX_STOCK_PRICES_URL =
+      'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' +
+      'securities.json';
+  this.MOEX_STOCK_URL = 'http://moex.com/en/issue.aspx?code=';
+  this.DISCOUNT_MARKER = 110;
+  this.UPDATE_INTERVAL = 15;
+  this.ORDINARY = 'ordinary';
+  this.PREFERRED = 'preferred';
+  this.STATE_PART_YES = 'yes';
+  this.STATE_PART_NO = 'no';
   this.shares = {};
-};
+}
 
 // Inheritance
 Stocks.prototype = Object.create(Securities.prototype);
 Stocks.prototype.constructor = Stocks;
-
-// Properties
-Stocks.prototype.MICEX_STOCK_PRICES_URL =
-    'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' +
-    'securities.json';
-Stocks.prototype.MOEX_STOCK_URL = 'http://moex.com/en/issue.aspx?code=';
-Stocks.prototype.DISCOUNT_MARKER = 110;
-Stocks.prototype.UPDATE_INTERVAL = 15;
-Stocks.prototype.ORDINARY = 'ordinary';
-Stocks.prototype.PREFERRED = 'preferred';
-Stocks.prototype.STATE_PART_YES = 'yes';
-Stocks.prototype.STATE_PART_NO = 'no';
 
 // Private get quotes from Micex
 Stocks.prototype.getQuotes_ = function() {
@@ -78,11 +75,11 @@ Stocks.prototype.getQuotes_ = function() {
 
   for (var i = 0, len = secData.length; i < len; i++) {
     quotes[secData[i][0]] = {
-      lot: secData[i][4] === null ? null:  secData[i][4],
-      price: marketData[i][12] === null ? null: marketData[i][12],
-      volume: secData[i][18] === null ? null: secData[i][18],
+      lot: secData[i][4] === null ? null : secData[i][4],
+      price: marketData[i][12] === null ? null : marketData[i][12],
+      volume: secData[i][18] === null ? null : secData[i][18],
       moex: this.MOEX_STOCK_URL + secData[i][0],
-      type: secData[i][25] === '1' ? this.ORDINARY: this.PREFERRED
+      type: secData[i][25] === '1' ? this.ORDINARY : this.PREFERRED
     };
   }
 
@@ -91,35 +88,41 @@ Stocks.prototype.getQuotes_ = function() {
 
 // Public get Quotes
 Stocks.prototype.getQuotes = function() {
-
-  var sets = Sets;
   var self = this;
   var quotes = this.getQuotes_();
 
-  sets.objStocks.forEach( function(item) {
+  portfolio.sets.objStocks.forEach( function(item) {
     item.state_part = item.state ? self.STATE_PART_YES : self.STATE_PART_NO;
 
-    item.lot = quotes[item.symbol].lot === null ?  null:
+    item.lot = quotes[item.symbol].lot === null ?
+        null :
         quotes[item.symbol].lot;
 
-    item.price = quotes[item.symbol].price === null ? null:
+    item.price = quotes[item.symbol].price === null ?
+        null :
         quotes[item.symbol].price;
 
-    item.volume = quotes[item.symbol].volume === null ? null:
+    item.volume = quotes[item.symbol].volume === null ?
+        null :
         quotes[item.symbol].volume;
 
-    item.moex = quotes[item.symbol].moex === null ? null:
+    item.moex = quotes[item.symbol].moex === null ?
+        null :
         quotes[item.symbol].moex;
-    item.type = quotes[item.symbol].type === null ? null:
+
+    item.type = quotes[item.symbol].type === null ?
+        null :
         quotes[item.symbol].type;
 
     item.price_class = item.discount < self.DISCOUNT_MARKER ? ' class=buy' : '';
 
-    item.discount = item.price === null ? null:
+    item.discount = item.price === null ?
+        null :
         (Math.round(item.price * 100 / item.target * 100) / 100).toFixed(2) +
         '%';
 
-    item.pe = item.net_profit === null ? null:
+    item.pe = item.net_profit === null ?
+        null :
         (Math.round(item.volume * item.price / item.net_profit * 100)).
             toFixed(2) / 100 ;
 
@@ -128,7 +131,7 @@ Stocks.prototype.getQuotes = function() {
             toFixed(2) / 100;
   });
 
-   this.shares = sets.objStocks;
+   this.shares = portfolio.sets.objStocks;
  };
 
 
@@ -136,6 +139,9 @@ Stocks.prototype.getQuotes = function() {
 
 // Constructor
 function Currencies() {
+  this.MICEX_EXCHANGE_RATES_URL =
+      'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/' +
+      'rates.json';
   this.Curr = {};
 }
 
@@ -143,15 +149,8 @@ function Currencies() {
 Currencies.prototype = Object.create(Securities.prototype);
 Currencies.prototype.constructor = Currencies;
 
-// Properties
-Currencies.prototype.MICEX_EXCHANGE_RATES_URL =
-    'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/' +
-    'rates.json';
-
 // Exchange rates from Micex
 Currencies.prototype.getRates = function() {
-  var sets = Sets;
-
   var responseData = Securities.prototype.getExternalData_(
       this.MICEX_EXCHANGE_RATES_URL
   );
@@ -162,11 +161,13 @@ Currencies.prototype.getRates = function() {
 
   var metaData = responseData.cbrf.data;
 
-  sets.currencyTemplate[0].price = metaData[0][3] === null ? null:
+  portfolio.sets.currencyTemplate[0].price = metaData[0][3] === null ?
+      null :
       metaData[0][3];
 
-  sets.currencyTemplate[1].price = metaData[0][6] === null ? null:
+  portfolio.sets.currencyTemplate[1].price = metaData[0][6] === null ?
+      null :
       metaData[0][6];
 
-  this.Curr = sets.currencyTemplate;
-}
+  this.Curr = portfolio.sets.currencyTemplate;
+};

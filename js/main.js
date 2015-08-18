@@ -1,9 +1,9 @@
 'use strict';
 
 $(document).ready(function() {
-  var sets = Sets;
-
-  if (isNotChrome()) return;
+  if (isNotChrome()) {
+    return;
+  }
 
   var currencies = new Currencies();
   currencies.getRates();
@@ -14,7 +14,7 @@ $(document).ready(function() {
       currencies.Curr[1].price;
 
   var header = $('<div></div>')
-      .append('<a href =' + sets.MICEX_INDEX_URL +
+      .append('<a href =' + portfolio.sets.MICEX_INDEX_URL +
       '>MICEX Index</a>\u00a0\u00a0' + '<text>' + currString + '</text><p/>');
   $('body').append(header);
 
@@ -23,11 +23,11 @@ $(document).ready(function() {
 
   var tableStocks = new Table(
       'Stocks',
-      sets.STOCK_INIT_SORTING,
+      portfolio.sets.STOCK_INIT_SORTING,
       'stocksBody',
       'stocksScript',
-      sets.stockHeaderTemplate,
-      sets.stockBodyTemplate
+      portfolio.sets.stockHeaderTemplate,
+      portfolio.sets.stockBodyTemplate
   );
   tableStocks.addTableTmp();
   tableStocks.addTable();
@@ -40,18 +40,16 @@ $(document).ready(function() {
       },
       stocks.UPDATE_INTERVAL * 1000
   )
-})
+});
 
  // Check 4 Chrome
 function isNotChrome() {
-  var sets = Sets;
-
   if (navigator.userAgent.search(/Chrome/) != -1) {
     return false;
   }
 
   $('<p/>', {
-    text: sets.NOT_CHROME
+    text: portfolio.sets.NOT_CHROME
   }).appendTo('body');
 
   return true;
