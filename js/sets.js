@@ -42,6 +42,7 @@ portfolio.sets = (function namespace() {
       queue: 1,
       book_value: 9816558000000,
       net_profit: 159004000000,
+      div_14_12: [7.2, 7.2, 5.99],
       rep_type: 'МСФО&nbsp;2014',
       site: 'http://www.gazprom.ru/investors/disclosure/reports/2015'
     },
@@ -53,6 +54,7 @@ portfolio.sets = (function namespace() {
       queue: 1,
       book_value: 2020100000000,
       net_profit: 290300000000,
+      div_14_12: [0.45, 3.2, 3.2],
       rep_type: 'МСФО&nbsp;2014',
       site: 'http://data.sberbank.ru/moscow/ru/investor_relations/' +
       'accountability/fin_reports_ifrs/?base=beta'
@@ -65,6 +67,7 @@ portfolio.sets = (function namespace() {
       queue: 1,
       book_value: 2872000000000,
       net_profit: 348000000000,
+      div_14_12: [8.21, 12.85, 8.05],
       rep_type: 'МСФО&nbsp;2014',
       site: 'http://www.rosneft.ru/Investors/statements_and_presentations'
     },
@@ -76,6 +79,7 @@ portfolio.sets = (function namespace() {
       queue: 1,
       book_value: 255966000000,
       net_profit: 35240000000,
+      div_14_12: [4.05, 4.848555415, 4.1022],
       rep_type: 'МСФО&nbsp;2014',
       site: 'http://www.rostelecom.ru/ir/results_and_presentations/' +
       'financials/IFRS'
@@ -88,6 +92,7 @@ portfolio.sets = (function namespace() {
       queue: 1,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0.00117, 0.00116, 0.00143],
       rep_type: 'МСФО&nbsp;2014',
       site: 'http://www.vtb.ru/ir/statements'
     },
@@ -99,6 +104,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [670.04, 469.17, 400.83],
       site: 'http://www.nornik.ru/investoram/raskryitie-informaczii/' +
       'ezhekvartalnyie-otchetyi-emitenta'
     },
@@ -110,6 +116,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [3.87, 2.38, 1.22],
       site: 'http://moex.com/s1347'
     },
     {
@@ -120,6 +127,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [113, 211, 24],
       site: 'http://www.bashneft.ru/shareholders_and_investors/disclosure/' +
       'quarterly'
     },
@@ -131,6 +139,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [8.21, 2.36, 1.48],
       site: 'http://www.surgutneftegas.ru/ru/investors/reports/quarterly'
     },
     {
@@ -141,6 +150,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0.27, 0.379, 0.29],
       site: 'http://www.eon-russia.ru/shareholders/reports/finance_reports'
     },
     {
@@ -151,6 +161,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0.080731, 0.0559, 0],
       site: 'http://enel.ru/press_center/investor_information/' +
       'financial_statements/ifsr_financial_statements/index.php'
     },
@@ -162,6 +173,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0, 0.4556, 1.323473504],
       site: 'http://www.lenenergo.ru/shareholders/fin_reports/?part=1'
     },
     {
@@ -172,6 +184,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0.01561855, 0.01358751, 0.00955606],
       site: 'http://www.rushydro.ru/investors/reports'
     },
     {
@@ -182,6 +195,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0, 0, 0],
       site: 'http://www.rao-esv.ru/shareholders-and-investors/' +
       'financial-statements/ifrs'
     },
@@ -193,6 +207,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0, 0, 0.08],
       site: 'http://www.rosseti.ru/investors/info/financeinfo/reports/msfo'
     },
     {
@@ -203,6 +218,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0.000664788, 0, 0],
       site: 'http://www.fsk-ees.ru/shareholders_and_investors/' +
       'financial_information/reporting_under_ifrs'
     },
@@ -214,6 +230,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0, 0, 0],
       site: 'http://www.trk.tom.ru/investors/disclosure/finance.php?' +
       'bitrix_include_areas=Y&clear_cache=Y&year=По+МСФО'
     },
@@ -225,6 +242,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [19.56, 23.82, 14.6],
       site: 'http://www.company.mts.ru/ir/control/data/quarterly_reports'
     },
     {
@@ -235,6 +253,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [56.27, 0, 0],
       site: 'http://mgts.ru/company/investors/disclose/reports'
     },
     {
@@ -245,6 +264,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [16.13, 64.51, 54.17],
       site: 'http://corp.megafon.ru/investors/shareholder/financial_report'
     },
     {
@@ -255,6 +275,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [1.47, 1.47, 1.11],
       site: 'http://www.alrosa.ru/documents/ежеквартальные-отчеты'
     },
     {
@@ -265,6 +286,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0.5, 0.45, 0.44],
       site: 'http://www.irkut.com/investors-and-shareholders/statements'
     },
     {
@@ -275,6 +297,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [0.53, 0.41, 0.53],
       site: 'http://www.irkutskenergo.ru/qa/42.2.html'
     },
     {
@@ -285,6 +308,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [54.6, 34.44, 0],
       site: 'http://cherkizovo.com/investors/reports/financial'
     },
     {
@@ -295,6 +319,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [1.9, 6.03, 1.63],
       site: 'http://www.protek-group.ru/ru/4investors/oao-protek/' +
       'financial-results1'
     },
@@ -306,6 +331,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [35, 44.3, 35.35],
       site: 'https://www.phosagro.ru/investors/reports/msfo'
     },
     {
@@ -316,6 +342,7 @@ portfolio.sets = (function namespace() {
       queue: 2,
       book_value: 0,
       net_profit: 0,
+      div_14_12: [139, 152, 64],
       site: 'http://www.acron.ru/investors/financial_statement/?' +
       'set_filter=Y&arFilterDocument_46_4163016541=Y&' +
       'arFilterDocument_IBLOCK_SECTION_ID_326707096=Y&' +
