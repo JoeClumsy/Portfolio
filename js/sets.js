@@ -3,12 +3,22 @@
 var portfolio = {};
 
 portfolio.sets = (function namespace() {
-  // Unsupported browser
-  var NOT_CHROME =
-      'Данный браузер не поддерживается. Используйте Google Chrome.';
-
-  // MICEX index
+  var NOT_CHROME = 'This browser unsupported. Use Google Chrome.';
   var MICEX_INDEX_URL = 'http://moex.com/en/index/MICEXINDEXCF/technical';
+  var MICEX_STOCK_PRICES_URL =
+      'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' +
+      'securities.json';
+  var MICEX_EXCHANGE_RATES_URL =
+      'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/' +
+      'rates.json';
+  var MOEX_STOCK_URL = 'http://moex.com/en/issue.aspx?code=';
+  var DISCOUNT_MARKER = 110;
+  var UPDATE_INTERVAL = 15;
+  var ORDINARY = 'ordinary';
+  var PREFERRED = 'preferred';
+  var STATE_PART_YES = 'yes';
+  var STATE_PART_NO = 'no';
+  var STOCK_INIT_SORTING = [[3, 1], [6, 0]];
 
   // Currencies template
   var currTmp = [
@@ -313,9 +323,6 @@ portfolio.sets = (function namespace() {
     }
   ];
 
-  // Stocks table initial sorting
-  var STOCK_INIT_SORTING = [[3, 1], [6, 0]];
-
   // Stocks header template
   var stockHeaderTmp = [
     ['#', 7],
@@ -348,6 +355,15 @@ portfolio.sets = (function namespace() {
   return {
     NOT_CHROME: NOT_CHROME,
     MICEX_INDEX_URL: MICEX_INDEX_URL,
+    MICEX_STOCK_PRICES_URL: MICEX_STOCK_PRICES_URL,
+    MICEX_EXCHANGE_RATES_URL: MICEX_EXCHANGE_RATES_URL,
+    MOEX_STOCK_URL: MOEX_STOCK_URL,
+    DISCOUNT_MARKER: DISCOUNT_MARKER,
+    UPDATE_INTERVAL: UPDATE_INTERVAL,
+    ORDINARY: ORDINARY,
+    PREFERRED: PREFERRED,
+    STATE_PART_YES: STATE_PART_YES,
+    STATE_PART_NO: STATE_PART_NO,
     STOCK_INIT_SORTING: STOCK_INIT_SORTING,
     currencyTemplate: currTmp,
     objStocks: objStocks,

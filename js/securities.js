@@ -41,16 +41,6 @@ Securities.prototype.getExternalData_ = function(requestURL) {
 
 // Constructor
 function Stocks() {   //Securities.call(this);
-  this.MICEX_STOCK_PRICES_URL =
-      'http://www.micex.ru/iss/engines/stock/markets/shares/boards/tqbr/' +
-      'securities.json';
-  this.MOEX_STOCK_URL = 'http://moex.com/en/issue.aspx?code=';
-  this.DISCOUNT_MARKER = 110;
-  this.UPDATE_INTERVAL = 15;
-  this.ORDINARY = 'ordinary';
-  this.PREFERRED = 'preferred';
-  this.STATE_PART_YES = 'yes';
-  this.STATE_PART_NO = 'no';
   this.shares = {};
 }
 
@@ -63,7 +53,7 @@ Stocks.prototype.getQuotes_ = function() {
   var quotes = {};
 
   var responseData = Securities.prototype.getExternalData_(
-      this.MICEX_STOCK_PRICES_URL
+      portfolio.sets.MICEX_STOCK_PRICES_URL
   );
 
   if (!responseData) {
@@ -78,8 +68,9 @@ Stocks.prototype.getQuotes_ = function() {
       lot: secData[i][4] === null ? null : secData[i][4],
       price: marketData[i][12] === null ? null : marketData[i][12],
       volume: secData[i][18] === null ? null : secData[i][18],
-      moex: this.MOEX_STOCK_URL + secData[i][0],
-      type: secData[i][25] === '1' ? this.ORDINARY : this.PREFERRED
+      moex: portfolio.sets.MOEX_STOCK_URL + secData[i][0],
+      type: secData[i][25] === '1' ?
+          portfolio.sets.ORDINARY : portfolio.sets.PREFERRED
     };
   }
 
@@ -92,7 +83,8 @@ Stocks.prototype.getQuotes = function() {
   var quotes = this.getQuotes_();
 
   portfolio.sets.objStocks.forEach( function(item) {
-    item.state_part = item.state ? self.STATE_PART_YES : self.STATE_PART_NO;
+    item.state_part = item.state ?
+        portfolio.sets.STATE_PART_YES : portfolio.sets.STATE_PART_NO;
 
     item.lot = quotes[item.symbol].lot === null ?
         null :
@@ -114,7 +106,8 @@ Stocks.prototype.getQuotes = function() {
         null :
         quotes[item.symbol].type;
 
-    item.price_class = item.discount < self.DISCOUNT_MARKER ? ' class=buy' : '';
+    item.price_class = item.discount < portfolio.sets.DISCOUNT_MARKER ?
+        ' class=buy' : '';
 
     item.discount = item.price === null ?
         null :
@@ -139,9 +132,6 @@ Stocks.prototype.getQuotes = function() {
 
 // Constructor
 function Currencies() {
-  this.MICEX_EXCHANGE_RATES_URL =
-      'http://www.micex.ru/iss/statistics/engines/currency/markets/selt/' +
-      'rates.json';
   this.Curr = {};
 }
 
@@ -152,7 +142,7 @@ Currencies.prototype.constructor = Currencies;
 // Exchange rates from Micex
 Currencies.prototype.getRates = function() {
   var responseData = Securities.prototype.getExternalData_(
-      this.MICEX_EXCHANGE_RATES_URL
+      portfolio.sets.MICEX_EXCHANGE_RATES_URL
   );
 
   if (!responseData) {
