@@ -79,7 +79,6 @@ Stocks.prototype.getQuotes_ = function() {
 
 // Public get Quotes
 Stocks.prototype.getQuotes = function() {
-  var self = this;
   var quotes = this.getQuotes_();
 
   portfolio.sets.objStocks.forEach( function(item) {
@@ -114,10 +113,18 @@ Stocks.prototype.getQuotes = function() {
         (Math.round(item.price * 100 / item.target * 100) / 100).toFixed(2) +
         '%';
 
+    var sum_divs = item.div_14_12[0] + item.div_14_12[1] + item.div_14_12[2];
+    var avg_divs = (sum_divs / 3).toFixed(item.lot.toString().length - 1);
+    item.avg_divs = avg_divs == 0 ? null : avg_divs;
+
+    var calc_price = item.queue === 1 ? item.avg_divs * 10 : item.avg_divs * 5;
+    calc_price = calc_price.toFixed(item.lot.toString().length - 1);
+    item.calc_price = calc_price == 0 ? null : calc_price;
+
     item.pe = item.net_profit === null ?
         null :
         (Math.round(item.volume * item.price / item.net_profit * 100)).
-            toFixed(2) / 100 ;
+            toFixed(2) / 100;
 
     item.pb = item.book_value === null ? null:
         (Math.round(item.volume * item.price / item.book_value * 100)).

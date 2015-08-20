@@ -359,6 +359,8 @@ portfolio.sets = (function namespace() {
     ['Price', 50],
     ['Target', 50],
     ['Discount', 70],
+    ['Calc Price', 70],
+    ['Avg Divs', 60],
     // ['P/E', 45],
     // ['P/B', 45],
     ['Lot', 45],
@@ -375,6 +377,8 @@ portfolio.sets = (function namespace() {
         '<td${price_class}>${price}</td>' +
         '<td>${target}</td>' +
         '<td>${discount}</td>' +
+        '<td>${calc_price}</td>' +
+        '<td>${avg_divs}</td>' +
         '<td>${lot}</td>' +
         '<td>${type}</td>' +
       '</tr>';
